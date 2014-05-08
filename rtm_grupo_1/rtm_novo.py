@@ -2,6 +2,7 @@
 from array import array
 from math import *
 
+
 #funcoes-------------------------------------------------
 def calculaPulsoSismico(timeIndex,tf,fc,dt):
     time = (timeIndex*dt)-tf    
@@ -94,10 +95,19 @@ for i in range(len(listaLinha)):
 #calculo de plotagem-------------------------------------
 for timeIndex in range(tempo):
     matrizCpf [pulsoX,pulsoY] += calculaPulsoSismico(timeIndex,tf,fc,dt) 
+   
+    print "Timestep=" + str(timeIndex)
+    print "Pulso Sismico= "+ str(calculaPulsoSismico(timeIndex,tf,fc,dt))
+    
     for i in range(bordaConta,len(listaLinha)-bordaConta):
         for j in range(bordaConta,len(listaColuna)-bordaConta):
-            matrizNpf[i,j]=2*matrizCpf[i,j]-matrizPpf[i,j]-(matrizVel[i,j]**2*fat*(16*(matrizCpf[i,j+1]+matrizCpf[i,j-1]+matrizCpf[i+1,j]+matrizCpf[i-1,j])-1*(matrizCpf[i,j+2]+matrizCpf[i,j-2]+matrizCpf[i+2,j]+matrizCpf[i-2,j])-60*matrizCpf[i,j]))
-            #print "matrizNpf= " + str(matrizNpf[i,j])      
+            matrizNpf[i,j]=2*matrizCpf[i,j]-matrizPpf[i,j]+(matrizVel[i,j]**2*fat*
+                                                            (16*(matrizCpf[i,j+1]+matrizCpf[i,j-1]+matrizCpf[i+1,j]+matrizCpf[i-1,j])-1*
+                                                             (matrizCpf[i,j+2]+matrizCpf[i,j-2]+matrizCpf[i+2,j]+matrizCpf[i-2,j])-60*matrizCpf[i,j]))
+            
+            if (matrizNpf[i,j] != 0.0):
+                print "matrizNpf= " + str(matrizNpf[i,j])      
+    
     matrizPpf = matrizCpf
     matrizCpf = matrizNpf
 
