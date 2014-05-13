@@ -21,7 +21,7 @@ listaLinha = []
 fat = 1
 borda = 0
 bordaConta = 2
-tempo = 500
+tempo = 1001
 valorVel = 2000.0
 linhaGera = 500
 colunaGera = 500
@@ -65,8 +65,6 @@ vel.close()
 
 #utilizado se nao for dado borda-------------------------
 valorVel = 2000.0
-linhaGera = 500
-colunaGera = 500
 pulsoX = (linhaGera/2)-1
 pulsoY = (colunaGera/2)-1
 
@@ -105,11 +103,18 @@ for timeIndex in range(tempo):
                                                             (16*(matrizCpf[i,j+1]+matrizCpf[i,j-1]+matrizCpf[i+1,j]+matrizCpf[i-1,j])-1*
                                                              (matrizCpf[i,j+2]+matrizCpf[i,j-2]+matrizCpf[i+2,j]+matrizCpf[i-2,j])-60*matrizCpf[i,j]))
             
-            if (matrizNpf[i,j] != 0.0):
-                print "matrizNpf= " + str(matrizNpf[i,j])      
-    
+            #if (matrizNpf[i,j] != 0.0):
+                #print "matrizNpf= " + str(matrizNpf[i,j])      
+
     matrizPpf = matrizCpf
     matrizCpf = matrizNpf
+    matrizNpf = matrizPpf
+
+    '''for i in range(0,len(listaLinha)):
+        for j in range(0,len(listaColuna)):
+            print str(abs(matrizCpf[i,j]))[0:3],
+        print
+    print'''
 
     #plotando em txt em 10 passos------------------------
     floatArray = array('f',[])
