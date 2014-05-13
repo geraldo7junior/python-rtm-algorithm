@@ -74,8 +74,8 @@ for passo_tempo in range(0,iteracoes):
     cpf[(centro,centro)] += explo
 
 #Laco para correr as matrizes considerando as posicoes validas para o calculo 
-    for i in range(tamanho-4):
-        for j in range (tamanho-4):
+    for i in range(linha-4):
+        for j in range (coluna-4):
                     
                 a = i+2
                 b = j+2
@@ -99,8 +99,10 @@ for passo_tempo in range(0,iteracoes):
                     cpfi = cpf[(a-2,b)]
 
 #Equacao para calcular uma posicao na matriz NPF
-                    resposta = 2*(cpfa-ppfa-(vela*(vela)*FAT)*(16 * cpfb + cpfc + cpfd+ cpfe -1*cpff + cpfg + cpfh + cpfi - 60 * cpfa))                
+                    resposta = 2*cpfa-ppfa+((vela*vela*FAT)*((16 * (cpfb + cpfc + cpfd+ cpfe)) -1*(cpff + cpfg + cpfh + cpfi) - 60 * cpfa))                
                     npf[(a,b)] = resposta
+#Manha para printar sem os zeros, so para comparacao
+                   # if npf[(a,b)] != 0.0:
                     lista_npf.append(npf[(a,b)])      
     
 #salvando binario em arquivo
@@ -114,6 +116,7 @@ for passo_tempo in range(0,iteracoes):
     saida_float = open('npf.txt', 'a')
     for i in lista_npf:
             saida_float.write('\n'+str(i))
+    saida_float.write("\n")
     saida_float.close()
 
 #Para printar as matrizes 
@@ -122,24 +125,21 @@ for passo_tempo in range(0,iteracoes):
 #            print npf[(i,j)],
 #        print
 #    print
-    
-#Condicao para nao estourar a matriz
-    if (a < tamanho-3) and (b < tamanho-3):
 
 #Transicao dos valores das matrizes para um novo Passo de tempo       
-        ppf[(a,b)] = cpf[(a,b)]
-        cpf[(a,b)] = npf[(a,b)]
+    ppf = cpf
+    cpf = npf
+    npf = ppf
+        
 
 #Zerando a npf para a nova iteracao       
-    for a in range(0,linha):
-        for b in range(0,coluna):
-            npf[(a,b)]=0.0
+#    for a in range(0,linha):
+#        for b in range(0,coluna):
+#            npf[(a,b)]=0.0
             
 #Incremento para a nova iteracao                        
     iteracao += 1.0
-
-    
-
+    lista_npf = []
 
     
 
