@@ -81,7 +81,7 @@ for passo_tempo in range(0,iteracoes):
                 b = j+2
 
 #Condicao para nao estourar a matriz
-                if (a+2 < linha-1) and (b+2 < coluna-1):
+                if (a+2 <= linha-1) and (b+2 <= coluna-1):
 
 #Gambi para deixar a equacao pequena - Jogando as posicoes das matrizes em variaveis       
                     cpfa = cpf[(a,b)]
@@ -113,11 +113,11 @@ for passo_tempo in range(0,iteracoes):
     output_file.close()
 
 #salvando no txt
-    saida_float = open('npf.txt', 'a')
-    for i in lista_npf:
-            saida_float.write('\n'+str(i))
-    saida_float.write("\n")
-    saida_float.close()
+#    saida_float = open('npf.txt', 'a')
+#    for i in lista_npf:
+#            saida_float.write('\n'+str(i))
+#    saida_float.write("\n")
+#    saida_float.close()
 
 #Para printar as matrizes 
 #    for i in range (0,linha):
