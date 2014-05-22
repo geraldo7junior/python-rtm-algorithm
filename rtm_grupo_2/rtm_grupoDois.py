@@ -74,36 +74,36 @@ for passo_tempo in range(0,iteracoes):
     cpf[(centro,centro)] += explo
 
 #Laco para correr as matrizes considerando as posicoes validas para o calculo 
-    for i in range(linha-4):
-        for j in range (coluna-4):
+    for i in range(linha):
+        for j in range (coluna):
                     
-                a = i+2
-                b = j+2
+            a = i+2
+            b = j+2
 
 #Condicao para nao estourar a matriz
-                if (a+2 <= linha-1) and (b+2 <= coluna-1):
+            if (a+2 <= linha-1) and (b+2 <= coluna-1):
 
 #Gambi para deixar a equacao pequena - Jogando as posicoes das matrizes em variaveis       
-                    cpfa = cpf[(a,b)]
-                    ppfa = ppf[(a,b)]
-                    vela = vel[(a,b)]
+                cpfa = cpf[(a,b)]
+                ppfa = ppf[(a,b)]
+                vela = vel[(a,b)]
 
-                    cpfb = cpf[(a,b+1)]
-                    cpfc = cpf[(a,b-1)]
-                    cpfd = cpf[(a+1,b)]
-                    cpfe = cpf[(a-1,b)]
+                cpfb = cpf[(a,b+1)]
+                cpfc = cpf[(a,b-1)]
+                cpfd = cpf[(a+1,b)]
+                cpfe = cpf[(a-1,b)]
 
-                    cpff = cpf[(a,b+2)]
-                    cpfg = cpf[(a,b-2)]
-                    cpfh = cpf[(a+2,b)]
-                    cpfi = cpf[(a-2,b)]
+                cpff = cpf[(a,b+2)]
+                cpfg = cpf[(a,b-2)]
+                cpfh = cpf[(a+2,b)]
+                cpfi = cpf[(a-2,b)]
 
 #Equacao para calcular uma posicao na matriz NPF
-                    resposta = 2*cpfa-ppfa+((vela*vela*FAT)*((16 * (cpfb + cpfc + cpfd+ cpfe)) -1*(cpff + cpfg + cpfh + cpfi) - 60 * cpfa))                
-                    npf[(a,b)] = resposta
+                resposta = 2*cpfa-ppfa+((vela*vela*FAT)*((16 * (cpfb + cpfc + cpfd+ cpfe)) -1*(cpff + cpfg + cpfh + cpfi) - 60 * cpfa))                
+            npf[(a,b)] = resposta
 #Manha para printar sem os zeros, so para comparacao
                    # if npf[(a,b)] != 0.0:
-                    lista_npf.append(npf[(a,b)])      
+            lista_npf.append(npf[(a,b)])      
     
 #salvando binario em arquivo
     from array import array
@@ -130,15 +130,11 @@ for passo_tempo in range(0,iteracoes):
     ppf = cpf
     cpf = npf
     npf = ppf
-        
-
-#Zerando a npf para a nova iteracao       
-#    for a in range(0,linha):
-#        for b in range(0,coluna):
-#            npf[(a,b)]=0.0
             
 #Incremento para a nova iteracao                        
     iteracao += 1.0
+
+#Zerando lista para nova iteracao
     lista_npf = []
 
     
